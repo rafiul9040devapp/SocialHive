@@ -1,9 +1,11 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:infinity_list_comments/comment/bloc/comment_bloc.dart';
 import 'package:infinity_list_comments/data/dio/api_client_dio.dart';
 import 'package:infinity_list_comments/data/https/api_client_http.dart';
+import 'package:infinity_list_comments/features/connectivity/bloc/connectivity_bloc.dart';
 import 'package:infinity_list_comments/repository/comment_repository.dart';
 import 'package:infinity_list_comments/repository/comment_repository_impl.dart';
 
@@ -15,6 +17,8 @@ class ServiceLocator {
     getIt.registerLazySingleton<http.Client>(() =>http.Client());
 
     getIt.registerLazySingleton<Dio>(() => Dio());
+
+    getIt.registerLazySingleton<Connectivity>(() => Connectivity());
 
 
     // you want to ensure that a single instance of a class is shared across the application,
@@ -30,8 +34,7 @@ class ServiceLocator {
 
 
     // when you need a fresh instance of a class every time it's requested
-    getIt.registerFactory(
-        () => CommentBloc(repository: getIt<CommentRepository>()));
-
+    getIt.registerFactory(() => CommentBloc(repository: getIt<CommentRepository>()));
+    getIt.registerFactory(() => ConnectivityBloc(connectivity: getIt()));
   }
 }
