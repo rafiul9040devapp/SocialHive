@@ -21,7 +21,6 @@ class ServiceLocator {
 
     getIt.registerLazySingleton<Connectivity>(() => Connectivity());
 
-
     // you want to ensure that a single instance of a class is shared across the application,
     // but you don't want to create the instance until it is actually needed.
     getIt.registerLazySingleton<ApiClientHttp>(

@@ -41,11 +41,7 @@ class _CommentViewState extends State<CommentView> {
 
           case CommentStatus.success:
             if (state.albums.isEmpty) {
-              if (state.hasReachedMax) {
-                return Center(child: Text(state.errorMessage));
-              } else {
-                return const Center(child: Text('no album available'));
-              }
+              return const Center(child: Text('no album available'));
             }
 
             return ListView.builder(
@@ -73,6 +69,6 @@ class _CommentViewState extends State<CommentView> {
     if (!_scrollController.hasClients) return false;
     final maxScroll = _scrollController.position.maxScrollExtent;
     final currentScroll = _scrollController.offset;
-    return currentScroll >= (maxScroll * .9);
+    return currentScroll >= (maxScroll * .8);
   }
 }

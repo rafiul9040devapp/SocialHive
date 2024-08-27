@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:infinity_list_comments/features/connectivity/view/connection_page.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+
 
 
 class MyApp extends StatelessWidget {
@@ -7,10 +9,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final router = GetIt.instance<GoRouter>();
+    return  MaterialApp.router(
       title: 'Comment App',
       debugShowCheckedModeBanner: false,
-      home:ConnectionPage(),
+      routerConfig: router,
+
     );
   }
 }
