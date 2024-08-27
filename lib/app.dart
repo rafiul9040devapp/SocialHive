@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'Comment App',
       debugShowCheckedModeBanner: false,
       routerConfig: router,
-
+      theme: ThemeData.light(),
     );
   }
 }
