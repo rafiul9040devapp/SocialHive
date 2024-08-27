@@ -5,6 +5,7 @@ class BottomLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
     return Center(
       child: Container(
         height: 50,
@@ -31,4 +32,3 @@ class BottomLoader extends StatelessWidget {
     );
   }
 }
-

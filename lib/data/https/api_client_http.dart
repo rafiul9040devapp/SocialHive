@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
-import 'package:infinity_list_comments/comment/models/album.dart';
 import 'package:infinity_list_comments/utils/api_constants.dart';
 
+import '../../features/comment/models/album.dart';
 import '../api_exception.dart';
 
 class ApiClientHttp {

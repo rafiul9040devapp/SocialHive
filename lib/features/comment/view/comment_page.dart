@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinity_list_comments/comment/bloc/comment_bloc.dart';
-import 'package:infinity_list_comments/comment/view/comment_view.dart';
 import 'package:infinity_list_comments/di/service_locator.dart';
+
+import '../bloc/comment_bloc.dart';
+import 'comment_view.dart';
 
 class CommentPage extends StatelessWidget {
   const CommentPage({super.key});

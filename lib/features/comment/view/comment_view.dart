@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:infinity_list_comments/comment/bloc/comment_bloc.dart';
 
+
+import '../bloc/comment_bloc.dart';
 import 'components/bottom_loader.dart';
 import 'components/comment_item.dart';
 

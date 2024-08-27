@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import '../../comment/models/album.dart';
+
+import '../../features/comment/models/album.dart';
 import '../../utils/api_constants.dart';
 import '../api_exception.dart';
 

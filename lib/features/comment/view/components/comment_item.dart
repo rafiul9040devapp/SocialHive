@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:infinity_list_comments/comment/models/album.dart';
+
+import '../../models/album.dart';
+
 
 class CommentItem extends StatelessWidget {
   const CommentItem({

@@ -5,7 +5,8 @@ import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:stream_transform/stream_transform.dart';
 
-import '../../repository/comment_repository.dart';
+
+import '../../../repository/comment_repository.dart';
 import '../models/album.dart';
 
 part 'comment_event.dart';
@@ -35,7 +36,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
 
     try {
       if (state.status == CommentStatus.initial) {
-        final response = await repository.fetchComments();
+        final response = await repository.fetchCommentsDio();
         return emit(
           response.fold(
             (failure) => state.copyWith(
@@ -49,7 +50,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
       }
 
       final fetchedComments =
-          await repository.fetchComments(state.albums.length);
+          await repository.fetchCommentsDio(state.albums.length);
       fetchedComments.fold(
         (failure) => emit(state.copyWith(
             status: CommentStatus.failure, errorMessage: failure.message)),
