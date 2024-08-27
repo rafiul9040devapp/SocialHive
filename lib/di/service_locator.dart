@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:infinity_list_comments/data/dio/api_client_dio.dart';
 import 'package:infinity_list_comments/data/https/api_client_http.dart';
+import 'package:infinity_list_comments/features/comment_details/bloc/comment_details_bloc.dart';
 import 'package:infinity_list_comments/features/connectivity/bloc/connectivity_bloc.dart';
 import 'package:infinity_list_comments/repository/comment_repository.dart';
 import 'package:infinity_list_comments/repository/comment_repository_impl.dart';
@@ -36,5 +37,6 @@ class ServiceLocator {
     // when you need a fresh instance of a class every time it's requested
     getIt.registerFactory(() => CommentBloc(repository: getIt<CommentRepository>()));
     getIt.registerFactory(() => ConnectivityBloc(connectivity: getIt()));
+    getIt.registerFactory(() => CommentDetailsBloc());
   }
 }

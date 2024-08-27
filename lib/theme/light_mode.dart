@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 
+import 'app_colors.dart';
+
 ThemeData lightMode = ThemeData(
-  colorScheme: ColorScheme.light(
-    surface: Colors.grey.shade300,
-    primary: Colors.grey.shade500,
-    secondary: Colors.grey.shade100,
-    tertiary: Colors.white,
-    inversePrimary: Colors.grey.shade700,
+  colorScheme: const ColorScheme.light(
+    surface: AppColors.concrete,
+    primary: AppColors.boulder,
+    secondary: AppColors.alabaster,
+    tertiary: AppColors.white,
+    inversePrimary: AppColors.white,
+  ),
+  scaffoldBackgroundColor: AppColors.alabaster,
+  appBarTheme: const AppBarTheme(
+    backgroundColor: AppColors.concrete,
+    iconTheme: IconThemeData(color: AppColors.mineShaft),
   ),
 );

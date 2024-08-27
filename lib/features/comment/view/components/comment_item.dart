@@ -19,11 +19,13 @@ class CommentItem extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context).colorScheme;
 
     return GestureDetector(
       onTap:() => _navigateToCommentDetailsPage(album),
       child: Card(
         elevation: 3.0,
+        color: theme.tertiary,
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.0),
@@ -39,17 +41,19 @@ class CommentItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              const SizedBox(height: 4.0),
-              Text(
-                album.email,
-                style: textTheme.titleMedium?.copyWith(
-                      color: Colors.grey[600],
-                    ),
-              ),
+              // const SizedBox(height: 4.0),
+              // Text(
+              //   album.email,
+              //   style: textTheme.titleMedium?.copyWith(
+              //         color: Colors.grey[600],
+              //       ),
+              // ),
               const SizedBox(height: 8.0),
               Text(
                 album.body,
                 style: textTheme.bodyMedium,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),
