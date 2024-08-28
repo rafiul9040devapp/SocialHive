@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:infinity_list_comments/theme/theme_service.dart';
 
 class BottomLoader extends StatelessWidget {
   const BottomLoader({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.sizeOf(context).width;
     return Center(
       child: Container(
         height: 50,
@@ -21,7 +21,7 @@ class BottomLoader extends StatelessWidget {
             ),
           ],
         ),
-        child: const Padding(
+        child:  const Padding(
           padding: EdgeInsets.all(10.0),
           child: CircularProgressIndicator(
             strokeWidth: 3,

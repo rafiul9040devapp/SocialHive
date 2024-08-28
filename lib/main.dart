@@ -6,6 +6,7 @@ import 'package:infinity_list_comments/utils/simple_bloc_observer.dart';
 import 'app.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer= const SimpleBlocObserver();
   ServiceLocator.setUp();
   AppRoutes.setupRouter();

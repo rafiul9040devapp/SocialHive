@@ -13,4 +13,7 @@ class AppColors {
   static const Color white = Color(0xFFFFFFFF); // Tertiary (white)
   static const Color darkGery = Color(0xFF616161); // Inverse Primary (grey.shade700)
 
+
+  static const Color red = Colors.redAccent;
+
 }

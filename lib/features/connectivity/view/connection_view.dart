@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinity_list_comments/features/connectivity/bloc/connectivity_bloc.dart';
+import 'package:infinity_list_comments/features/connectivity/view/components/no_internet_connection.dart';
 
 import '../../comment/view/comment_page.dart';
 
@@ -17,13 +18,7 @@ class ConnectionView extends StatelessWidget {
           case ConnectionStatus.connected:
             return const CommentPage();
           case ConnectionStatus.disconnected:
-            return const Center(
-              child: Text(
-                'Please check your internet connection and try again.',
-                style: TextStyle(fontSize: 18),
-                textAlign: TextAlign.center,
-              ),
-            );
+            return NoInternetConnection(message: state.message ?? 'No Internet Connection');
         }
       },
     );

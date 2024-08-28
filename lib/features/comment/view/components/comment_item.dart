@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinity_list_comments/di/service_locator.dart';
+import 'package:infinity_list_comments/theme/theme_service.dart';
 
 import '../../../../route/app_routes.dart';
 import '../../models/album.dart';
@@ -18,8 +19,8 @@ class CommentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final textTheme = Theme.of(context).textTheme;
-    final theme = Theme.of(context).colorScheme;
+
+     final theme = Theme.of(context).colorScheme;
 
     return GestureDetector(
       onTap:() => _navigateToCommentDetailsPage(album),
@@ -37,7 +38,7 @@ class CommentItem extends StatelessWidget {
             children: [
               Text(
                 album.name,
-                style: textTheme.titleLarge?.copyWith(
+                style: themeService.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
@@ -51,7 +52,7 @@ class CommentItem extends StatelessWidget {
               const SizedBox(height: 8.0),
               Text(
                 album.body,
-                style: textTheme.bodyMedium,
+                style: themeService.textTheme.bodyMedium,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
