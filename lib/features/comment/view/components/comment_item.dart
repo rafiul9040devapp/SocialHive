@@ -42,13 +42,6 @@ class CommentItem extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
               ),
-              // const SizedBox(height: 4.0),
-              // Text(
-              //   album.email,
-              //   style: textTheme.titleMedium?.copyWith(
-              //         color: Colors.grey[600],
-              //       ),
-              // ),
               const SizedBox(height: 8.0),
               Text(
                 album.body,

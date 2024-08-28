@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../route/app_routes.dart';
+import '../../../../theme/theme_service.dart';
 
 class CommentDetailsAppBar extends StatelessWidget {
   const CommentDetailsAppBar({super.key});
@@ -8,7 +9,10 @@ class CommentDetailsAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return AppBar(
-      //title: Text(name,style: textTheme.titleLarge,overflow: TextOverflow.fade,),
+      title: Text('Details'.toUpperCase(),style: themeService.textTheme.titleLarge?.copyWith(
+        letterSpacing: 5,
+      ),overflow: TextOverflow.fade,),
+      centerTitle: true,
       leading: GestureDetector(onTap: _navigateToCommentScreen, child: const Icon(Icons.arrow_back_ios)),
     );
   }
