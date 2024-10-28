@@ -56,8 +56,7 @@ class CommentBloc extends Bloc<CommentEvent, CommentState> {
             status: CommentStatus.failure, errorMessage: failure.message)),
         (albumList) => emit(
           albumList.isEmpty
-              ? state.copyWith(
-                  hasReachedMax: true, errorMessage: 'Nothing Left To Fetch')
+              ? state.copyWith(hasReachedMax: true)
               : state.copyWith(
                   status: CommentStatus.success,
                   albums: List.of(state.albums)..addAll(albumList),

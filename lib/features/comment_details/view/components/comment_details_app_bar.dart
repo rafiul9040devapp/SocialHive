@@ -7,7 +7,7 @@ class CommentDetailsAppBar extends StatelessWidget {
   const CommentDetailsAppBar({super.key});
   @override
   Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
+
     return AppBar(
       title: Text('Details'.toUpperCase(),style: themeService.textTheme.titleLarge?.copyWith(
         letterSpacing: 5,

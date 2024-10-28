@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:infinity_list_comments/theme/app_colors.dart';
 import 'package:infinity_list_comments/theme/theme_service.dart';
@@ -12,8 +11,6 @@ class NoInternetConnection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

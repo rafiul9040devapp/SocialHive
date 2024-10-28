@@ -28,10 +28,16 @@ class CommentPage extends StatelessWidget {
             );
           }
 
-          else{
+          if(state.connectionStatus == ConnectionStatus.disconnected){
             return Scaffold(
               body: NoInternetConnection(
                   message: state.message ?? 'No Internet Connection'),
+            );
+          }
+
+          else{
+            return const Scaffold(
+              body: SizedBox(),
             );
           }
         },

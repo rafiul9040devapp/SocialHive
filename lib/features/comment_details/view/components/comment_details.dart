@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:infinity_list_comments/features/comment/models/album.dart';
+import 'package:infinity_list_comments/route/app_routes.dart';
 
 class CommentDetails extends StatelessWidget {
   final Album album;
@@ -59,27 +60,50 @@ class CommentDetails extends StatelessWidget {
 
             const SizedBox(height: 48),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Expanded(
-                  child: Text(
-                    album.email,
-                    style: textTheme.titleSmall?.copyWith(
-                      color: Colors.grey[600],
-                      fontSize: 18,
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    textAlign: TextAlign.end,
-                  ),
-                ),
-              ],
-            )
+            ShowUserEmail(album: album, textTheme: textTheme)
 
           ],
         ),
       ),
     );
+  }
+}
+
+class ShowUserEmail extends StatelessWidget {
+  const ShowUserEmail({
+    super.key,
+    required this.album,
+    required this.textTheme,
+  });
+
+  final Album album;
+  final TextTheme textTheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => _navigateToUserDetails(),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Expanded(
+            child: Text(
+              album.email,
+              style: textTheme.titleSmall?.copyWith(
+                color: Colors.grey[600],
+                fontSize: 18,
+              ),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+              textAlign: TextAlign.end,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  _navigateToUserDetails() {
+    router.push(Routes.user.path(album.postId.toString()),extra: album.email);
   }
 }
