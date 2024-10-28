@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:go_router/go_router.dart';
-import 'package:infinity_list_comments/di/service_locator.dart';
 import 'package:infinity_list_comments/theme/theme_service.dart';
-
 import '../../../../route/app_routes.dart';
 import '../../models/album.dart';
 
