@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:infinity_list_comments/repository/comment_repository.dart';
+import 'package:infinity_list_comments/repository/comment/comment_repository.dart';
 
 import '../models/user.dart';
 

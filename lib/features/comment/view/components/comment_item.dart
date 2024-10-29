@@ -15,7 +15,6 @@ class CommentItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-
      final theme = Theme.of(context).colorScheme;
 
     return GestureDetector(

@@ -6,7 +6,7 @@ import 'package:equatable/equatable.dart';
 import 'package:stream_transform/stream_transform.dart';
 
 
-import '../../../repository/comment_repository.dart';
+import '../../../repository/comment/comment_repository.dart';
 import '../models/album.dart';
 
 part 'comment_event.dart';

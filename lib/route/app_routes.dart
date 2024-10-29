@@ -5,6 +5,9 @@ import 'package:infinity_list_comments/features/comment/models/album.dart';
 import 'package:infinity_list_comments/features/comment/view/comment_page.dart';
 import 'package:infinity_list_comments/features/comment_details/view/comment_details_page.dart';
 import 'package:infinity_list_comments/features/connectivity/view/connection_page.dart';
+import 'package:infinity_list_comments/features/post/models/post.dart';
+import 'package:infinity_list_comments/features/post/view/post_page.dart';
+import 'package:infinity_list_comments/features/post_details/view/post_details_page.dart';
 import 'package:infinity_list_comments/features/user/view/user_page.dart';
 
 enum Routes {
@@ -12,6 +15,8 @@ enum Routes {
   comment,
   commentDetails,
   user,
+  post,
+  postDetails,
 }
 
 extension RouteExtensions on Routes {
@@ -25,12 +30,19 @@ extension RouteExtensions on Routes {
         return argument != null ? '/comment_details/:argument' : '/comment_details';
       case Routes.user:
         return argument != null ? '/user/:argument' : '/user';
+
+      case Routes.post:
+        return '/post';
+      case Routes.postDetails:
+        return argument != null ? '/post_details/:argument' : '/post_details';
       // case AppRoute.login:
       //   return '/login';
       // case AppRoute.settings:
       //   return '/settings';
       // case AppRoute.profile:
       //   return id != null ? '/profile/$id' : '/profile';
+
+
 
 
     }
@@ -43,7 +55,7 @@ class AppRoutes {
   static void setupRouter() {
     getIt.registerLazySingleton<GoRouter>(
       () => GoRouter(
-        initialLocation: Routes.home.path(),
+        initialLocation: Routes.post.path(),
         routes: [
           GoRoute(
             path: Routes.home.path(),
@@ -65,6 +77,17 @@ class AppRoutes {
             builder: (context, state) {
               final email = state.extra as String;
               return UserPage(userEmail: email);
+            },
+          ),
+          GoRoute(
+            path: Routes.post.path(),
+            builder: (context, state) => const PostPage(),
+          ),
+          GoRoute(
+            path: Routes.postDetails.path(':argument'),
+            builder: (context, state) {
+              final post = state.extra as Post;
+              return PostDetailsPage(post: post);
             },
           ),
         ],
