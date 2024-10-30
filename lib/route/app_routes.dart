@@ -4,6 +4,7 @@ import 'package:infinity_list_comments/di/service_locator.dart';
 import 'package:infinity_list_comments/features/comment/models/album.dart';
 import 'package:infinity_list_comments/features/comment/view/comment_page.dart';
 import 'package:infinity_list_comments/features/comment_details/view/comment_details_page.dart';
+import 'package:infinity_list_comments/features/comments_of_post/view/comments_of_post_page.dart';
 import 'package:infinity_list_comments/features/connectivity/view/connection_page.dart';
 import 'package:infinity_list_comments/features/post/models/post.dart';
 import 'package:infinity_list_comments/features/post/view/post_page.dart';
@@ -17,6 +18,7 @@ enum Routes {
   user,
   post,
   postDetails,
+  commentsOfPost,
 }
 
 extension RouteExtensions on Routes {
@@ -30,11 +32,13 @@ extension RouteExtensions on Routes {
         return argument != null ? '/comment_details/:argument' : '/comment_details';
       case Routes.user:
         return argument != null ? '/user/:argument' : '/user';
-
       case Routes.post:
         return '/post';
       case Routes.postDetails:
         return argument != null ? '/post_details/:argument' : '/post_details';
+      case Routes.commentsOfPost:
+        return argument != null ? '/comments_of_post/:argument' : '/comments_of_post';
+
       // case AppRoute.login:
       //   return '/login';
       // case AppRoute.settings:
@@ -88,6 +92,13 @@ class AppRoutes {
             builder: (context, state) {
               final post = state.extra as Post;
               return PostDetailsPage(post: post);
+            },
+          ),
+          GoRoute(
+            path: Routes.commentsOfPost.path(':argument'),
+            builder: (context, state) {
+              final postId = state.extra as int;
+              return CommentsOfPostPage(postId: postId);
             },
           ),
         ],

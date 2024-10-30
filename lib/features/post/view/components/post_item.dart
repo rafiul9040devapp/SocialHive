@@ -42,7 +42,7 @@ class PostItem extends StatelessWidget {
               ),
 
               const SizedBox(height: 8),
-              const ShowAllComments(),
+              ShowAllComments(post:post),
             ],
           ),
         ),
@@ -58,13 +58,14 @@ class PostItem extends StatelessWidget {
 }
 
 class ShowAllComments extends StatelessWidget {
-  const ShowAllComments({super.key});
+  final Post post;
+  const ShowAllComments({super.key, required this.post});
 
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => _navigateToUserDetails(),
+      onTap: () => _navigateToCommentsOfPost(post),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -100,7 +101,7 @@ class ShowAllComments extends StatelessWidget {
 
   }
 
-  _navigateToUserDetails() {
-    //router.push(Routes.user.path(album.postId.toString()),extra: album.email);
+  _navigateToCommentsOfPost(Post post) {
+    router.go(Routes.commentsOfPost.path(post.id.toString()),extra: post.id);
   }
 }

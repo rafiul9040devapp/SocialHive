@@ -10,6 +10,7 @@ import '../../connectivity/bloc/connectivity_bloc.dart';
 import '../../connectivity/view/components/no_internet_connection.dart';
 
 class PostPage extends StatelessWidget {
+
   const PostPage({super.key});
 
   @override
