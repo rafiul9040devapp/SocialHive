@@ -8,6 +8,7 @@ import 'package:infinity_list_comments/features/comment_details/bloc/comment_det
 import 'package:infinity_list_comments/features/comments_of_post/bloc/comments_of_post_bloc.dart';
 import 'package:infinity_list_comments/features/connectivity/bloc/connectivity_bloc.dart';
 import 'package:infinity_list_comments/features/post/bloc/post_bloc.dart';
+import 'package:infinity_list_comments/features/post_details/bloc/post_details_bloc.dart';
 import 'package:infinity_list_comments/features/user/bloc/user_bloc.dart';
 import 'package:infinity_list_comments/repository/comment/comment_repository.dart';
 import 'package:infinity_list_comments/repository/comment/comment_repository_impl.dart';
@@ -48,5 +49,6 @@ class ServiceLocator {
     getIt.registerFactory(() => UserBloc(repository: getIt<CommentRepository>()));
     getIt.registerFactory(()=> PostBloc(repository: getIt<PostRepository>()));
     getIt.registerFactory(()=> CommentsOfPostBloc(repository: getIt<PostRepository>()));
+    getIt.registerFactory(() => PostDetailsBloc());
   }
 }

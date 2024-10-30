@@ -11,6 +11,5 @@ final class GetCommentDetailsEvent extends CommentDetailsEvent{
   GetCommentDetailsEvent({required this.album});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [album];
 }

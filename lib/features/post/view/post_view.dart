@@ -37,10 +37,6 @@ class _PostViewState extends State<PostView> {
         case PostStatus.initial:
           return const Center(child: CircularProgressIndicator());
         case PostStatus.success:
-          if (state.posts.isEmpty) {
-            return const Center(child: Text('No Post Is Available'));
-          }
-
           return ListView.builder(
             itemBuilder: (context, index) {
               return index >= state.posts.length

@@ -146,7 +146,7 @@ class __$$PostImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$PostImpl implements _Post {
-  _$PostImpl(
+  const _$PostImpl(
       {@JsonKey(name: 'userId') this.userId,
       @JsonKey(name: 'id') this.id,
       @JsonKey(name: 'title') this.title,
@@ -205,7 +205,7 @@ class _$PostImpl implements _Post {
 }
 
 abstract class _Post implements Post {
-  factory _Post(
+  const factory _Post(
       {@JsonKey(name: 'userId') final int? userId,
       @JsonKey(name: 'id') final int? id,
       @JsonKey(name: 'title') final String? title,

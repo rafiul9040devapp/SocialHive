@@ -91,14 +91,14 @@ class ApiClientDio {
       final response = await dio.getUri(uri,
           options: Options(responseType: ResponseType.json));
       if (response.statusCode == 200) {
-        final List<dynamic> body = response.data as List<dynamic>;
-        if (body.isNotEmpty) {
+        final body = response.data;
+        if (body is List && body.isNotEmpty) {
           final postList = body.map((json) => Post.fromJson(json)).toList();
           return Right(postList);
         } else {
-          return Left(ApiException('No Post is Available'));
+          return const Right([]); // Return empty list if no data
         }
-      } else {
+      }else {
         return Left(ApiException.getApiStatus(response.statusCode ?? 0));
       }
     } on DioException catch (e) {
