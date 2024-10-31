@@ -2,12 +2,11 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinity_list_comments/di/service_locator.dart';
 import 'package:infinity_list_comments/features/comment/models/album.dart';
-import 'package:infinity_list_comments/features/comment/view/comment_page.dart';
 import 'package:infinity_list_comments/features/comment_details/view/comment_details_page.dart';
 import 'package:infinity_list_comments/features/comments_of_post/view/comments_of_post_page.dart';
 import 'package:infinity_list_comments/features/connectivity/view/connection_page.dart';
+import 'package:infinity_list_comments/features/home/view/home_page.dart';
 import 'package:infinity_list_comments/features/post/models/post.dart';
-import 'package:infinity_list_comments/features/post/view/post_page.dart';
 import 'package:infinity_list_comments/features/post_details/view/post_details_page.dart';
 import 'package:infinity_list_comments/features/user/view/user_page.dart';
 
@@ -59,7 +58,7 @@ class AppRoutes {
   static void setupRouter() {
     getIt.registerLazySingleton<GoRouter>(
       () => GoRouter(
-        initialLocation: Routes.post.path(),
+        initialLocation: Routes.comment.path(),
         routes: [
           GoRoute(
             path: Routes.home.path(),
@@ -67,7 +66,7 @@ class AppRoutes {
           ),
           GoRoute(
             path: Routes.comment.path(),
-            builder: (context, state) => const CommentPage(),
+            builder: (context, state) => const HomePage(initialPage: 0),
           ),
           GoRoute(
             path: Routes.commentDetails.path(':argument'),
@@ -85,7 +84,7 @@ class AppRoutes {
           ),
           GoRoute(
             path: Routes.post.path(),
-            builder: (context, state) => const PostPage(),
+            builder: (context, state) => const HomePage(initialPage: 1),
           ),
           GoRoute(
             path: Routes.postDetails.path(':argument'),
