@@ -14,24 +14,47 @@ class HomeView extends StatefulWidget {
   HomeViewState createState() => HomeViewState();
 }
 
-class HomeViewState extends State<HomeView> {
+class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin {
   late PageController _pageController;
+  late AnimationController _animationController;
+  late Animation<Offset> _slideAnimation;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController(initialPage: widget.initialPage);
+
+    // Initialize AnimationController
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(1.0, 0.0),
+      end: Offset.zero,
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
   }
 
   @override
   void dispose() {
     _pageController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 
   void _onBottomNavTapped(int index) {
     context.read<NavigationBloc>().add(PageTapped(index));
-    _pageController.jumpToPage(index);
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(seconds: 1), // delay for the transition
+      curve: Curves.easeInOut, // smoother animation curve
+    );
   }
 
   @override
@@ -39,17 +62,21 @@ class HomeViewState extends State<HomeView> {
     return Scaffold(
       body: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
-          return PageView(
-            controller: _pageController,
-            onPageChanged: (index) {
-              context.read<NavigationBloc>().add(PageTapped(index));
-              final routeName = index == 0 ? Routes.comment.path() : Routes.post.path();
-              router.goNamed(routeName);
-            },
-            children: const [
-              CommentPage(),
-              PostPage(),
-            ],
+          _animationController.forward(from: 0); // Restart animation on page change
+          return SlideTransition(
+            position: _slideAnimation,
+            child: PageView(
+              controller: _pageController,
+              onPageChanged: (index) {
+                context.read<NavigationBloc>().add(PageTapped(index));
+                final routeName = index == 0 ? Routes.comment.path() : Routes.post.path();
+                router.goNamed(routeName);
+              },
+              children: const [
+                CommentPage(),
+                PostPage(),
+              ],
+            ),
           );
         },
       ),
