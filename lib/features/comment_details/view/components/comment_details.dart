@@ -104,6 +104,6 @@ class ShowUserEmail extends StatelessWidget {
   }
 
   _navigateToUserDetails() {
-    router.push(Routes.user.path(album.postId.toString()),extra: album.email);
+    //router.push(Routes.user.path(album.postId.toString()),extra: album.email);
   }
 }

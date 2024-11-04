@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:infinity_list_comments/features/comments_of_post/models/comments_of_post.dart';
 import 'package:infinity_list_comments/features/post/models/post.dart';
 import 'package:infinity_list_comments/features/user/models/user.dart';
+import 'package:infinity_list_comments/features/user_list/model/user_profile.dart';
 
 import '../../features/comment/models/album.dart';
 import '../../utils/api_constants.dart';
@@ -126,6 +127,36 @@ class ApiClientDio {
           return Right(commentsOfPostList);
         } else {
           return Left(ApiException('There is no comment in this post'));
+        }
+      } else {
+        return Left(ApiException.getApiStatus(response.statusCode ?? 0));
+      }
+    } on DioException catch (e) {
+      return Left(ApiException(e.message.toString(), e.response?.statusCode));
+    } catch (e) {
+      return Left(ApiException('Unexpected error: $e'));
+    }
+  }
+
+  Future<Either<ApiException, List<UserProfile>>> fetchAllUsers() async {
+    final uri = Uri.https(
+      ApiConstants.baseUrl,
+      ApiConstants.userEndPoint,
+    );
+
+    try {
+      final response = await dio.getUri(uri,
+          options: Options(responseType: ResponseType.json));
+
+      if (response.statusCode == 200) {
+        final body = response.data;
+        if (body is List && body.isNotEmpty) {
+          final user = body.map((json) => UserProfile.fromJson(json)).toList();
+          return Right(user);
+        } else if(body is List && body.isEmpty) {
+          return const Right([]);
+        }else {
+          return Left(ApiException('User Not Found: Response data - $body'));
         }
       } else {
         return Left(ApiException.getApiStatus(response.statusCode ?? 0));

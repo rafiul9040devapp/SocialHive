@@ -18,6 +18,7 @@ enum Routes {
   post,
   postDetails,
   commentsOfPost,
+  userList,
 }
 
 extension RouteExtensions on Routes {
@@ -37,6 +38,8 @@ extension RouteExtensions on Routes {
         return argument != null ? '/post_details/:argument' : '/post_details';
       case Routes.commentsOfPost:
         return argument != null ? '/comments_of_post/:argument' : '/comments_of_post';
+      case Routes.userList:
+        return '/user_list';
 
       // case AppRoute.login:
       //   return '/login';
@@ -44,9 +47,6 @@ extension RouteExtensions on Routes {
       //   return '/settings';
       // case AppRoute.profile:
       //   return id != null ? '/profile/$id' : '/profile';
-
-
-
 
     }
   }
@@ -100,6 +100,12 @@ class AppRoutes {
               return CommentsOfPostPage(postId: postId);
             },
           ),
+
+          GoRoute(
+            path: Routes.userList.path(),
+            builder: (context, state) => const HomePage(initialPage: 2),
+          ),
+
         ],
       ),
     );

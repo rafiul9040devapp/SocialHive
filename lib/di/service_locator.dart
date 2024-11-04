@@ -11,10 +11,13 @@ import 'package:infinity_list_comments/features/home/bloc/navigation_bloc.dart';
 import 'package:infinity_list_comments/features/post/bloc/post_bloc.dart';
 import 'package:infinity_list_comments/features/post_details/bloc/post_details_bloc.dart';
 import 'package:infinity_list_comments/features/user/bloc/user_bloc.dart';
+import 'package:infinity_list_comments/features/user_list/bloc/user_list_bloc.dart';
 import 'package:infinity_list_comments/repository/comment/comment_repository.dart';
 import 'package:infinity_list_comments/repository/comment/comment_repository_impl.dart';
 import 'package:infinity_list_comments/repository/post/post_repository.dart';
 import 'package:infinity_list_comments/repository/post/post_repository_impl.dart';
+import 'package:infinity_list_comments/repository/user/user_repository.dart';
+import 'package:infinity_list_comments/repository/user/user_repository_impl.dart';
 
 import '../features/comment/bloc/comment_bloc.dart';
 
@@ -42,6 +45,8 @@ class ServiceLocator {
         apiClient: getIt<ApiClientHttp>()));
 
     getIt.registerLazySingleton<PostRepository>(() => PostRepositoryImpl(getIt<ApiClientDio>()));
+    getIt.registerLazySingleton<UserRepository>(()=> UserRepositoryImpl(getIt<ApiClientDio>()));
+
 
     // when you need a fresh instance of a class every time it's requested
     getIt.registerFactory(() => CommentBloc(repository: getIt<CommentRepository>()));
@@ -52,5 +57,6 @@ class ServiceLocator {
     getIt.registerFactory(()=> CommentsOfPostBloc(repository: getIt<PostRepository>()));
     getIt.registerFactory(() => PostDetailsBloc());
     getIt.registerFactory(() => NavigationBloc());
+    getIt.registerFactory(()=>UserListBloc(repository: getIt<UserRepository>()));
   }
 }

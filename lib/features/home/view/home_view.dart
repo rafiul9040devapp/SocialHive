@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinity_list_comments/features/comment/view/comment_page.dart';
 import 'package:infinity_list_comments/features/post/view/post_page.dart';
+import 'package:infinity_list_comments/features/user_list/view/user_list_page.dart';
 import 'package:infinity_list_comments/route/app_routes.dart';
 
 import '../bloc/navigation_bloc.dart';
@@ -69,12 +70,21 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
               controller: _pageController,
               onPageChanged: (index) {
                 context.read<NavigationBloc>().add(PageTapped(index));
-                final routeName = index == 0 ? Routes.comment.path() : Routes.post.path();
+                // final routeName = index == 0 ? Routes.comment.path() : Routes.post.path();
+
+                final routeName =  switch(index){
+                   0 => Routes.comment.path(),
+                   1 => Routes.post.path(),
+                   2 => Routes.userList.path(),
+                  int() => throw UnimplementedError(),
+                };
+
                 router.goNamed(routeName);
               },
               children: const [
                 CommentPage(),
                 PostPage(),
+                UserListPage(),
               ],
             ),
           );
@@ -93,6 +103,10 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
               BottomNavigationBarItem(
                 icon: Icon(Icons.post_add),
                 label: 'Posts',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person),
+                label: 'Profile',
               ),
             ],
           );
