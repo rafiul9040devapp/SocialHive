@@ -3,6 +3,8 @@ class ApiConstants{
   static const String commentsEndPoint = '/comments';
   static const String postsEndPoint = '/posts';
   static const String userEndPoint = '/users';
+  static const String albumEndPoint = '/albums';
+  static const String photoEndPoint = '/photos';
   static const int limit = 10;
 }
 

@@ -4,6 +4,7 @@ import 'package:infinity_list_comments/features/comment/view/comment_page.dart';
 import 'package:infinity_list_comments/features/post/view/post_page.dart';
 import 'package:infinity_list_comments/features/user_list/view/user_list_page.dart';
 import 'package:infinity_list_comments/route/app_routes.dart';
+import 'package:infinity_list_comments/theme/app_colors.dart';
 
 import '../bloc/navigation_bloc.dart';
 
@@ -53,7 +54,7 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
     context.read<NavigationBloc>().add(PageTapped(index));
     _pageController.animateToPage(
       index,
-      duration: const Duration(seconds: 1), // delay for the transition
+      duration: const Duration(milliseconds: 500), // delay for the transition
       curve: Curves.easeInOut, // smoother animation curve
     );
   }
@@ -63,15 +64,13 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
     return Scaffold(
       body: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
-          _animationController.forward(from: 0); // Restart animation on page change
+          _animationController.forward(from: 2);
           return SlideTransition(
             position: _slideAnimation,
             child: PageView(
               controller: _pageController,
               onPageChanged: (index) {
                 context.read<NavigationBloc>().add(PageTapped(index));
-                // final routeName = index == 0 ? Routes.comment.path() : Routes.post.path();
-
                 final routeName =  switch(index){
                    0 => Routes.comment.path(),
                    1 => Routes.post.path(),
@@ -92,8 +91,11 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
       ),
       bottomNavigationBar: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
+
           return BottomNavigationBar(
             currentIndex: state.selectedIndex,
+            selectedItemColor: AppColors.blackPearl,
+            unselectedItemColor: AppColors.darkGery,
             onTap: _onBottomNavTapped,
             items: const [
               BottomNavigationBarItem(
@@ -106,7 +108,7 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.person),
-                label: 'Profile',
+                label: 'Profiles',
               ),
             ],
           );

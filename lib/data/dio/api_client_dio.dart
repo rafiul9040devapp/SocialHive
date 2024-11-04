@@ -1,7 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:infinity_list_comments/features/albums_of_user/model/albums_of_user.dart';
 import 'package:infinity_list_comments/features/comments_of_post/models/comments_of_post.dart';
+import 'package:infinity_list_comments/features/photos_of_user/model/photos_of_user.dart';
 import 'package:infinity_list_comments/features/post/models/post.dart';
+import 'package:infinity_list_comments/features/post_of_user/model/posts_of_user.dart';
 import 'package:infinity_list_comments/features/user/models/user.dart';
 import 'package:infinity_list_comments/features/user_list/model/user_profile.dart';
 
@@ -167,5 +170,92 @@ class ApiClientDio {
       return Left(ApiException('Unexpected error: $e'));
     }
   }
+
+
+  Future<Either<ApiException, List<PhotosOfUser>>> fetchPhotosOfUser(String userId,[int startIndex = 0]) async {
+    final uri = Uri.https(
+      ApiConstants.baseUrl,
+      '${ApiConstants.userEndPoint}/$userId${ApiConstants.photoEndPoint}',
+      <String, String>{
+        '_start': '$startIndex',
+        '_limit': '${ApiConstants.limit}',
+      },
+    );
+
+    try {
+      final response = await dio.getUri(uri,
+          options: Options(responseType: ResponseType.json));
+      if (response.statusCode == 200) {
+        final body = response.data;
+        if (body is List && body.isNotEmpty) {
+          final photoList = body.map((json) => PhotosOfUser.fromJson(json)).toList();
+          return Right(photoList);
+        } else {
+          return const Right([]); // Return empty list if no data
+        }
+      }else {
+        return Left(ApiException.getApiStatus(response.statusCode ?? 0));
+      }
+    } on DioException catch (e) {
+      return Left(ApiException(e.message.toString(), e.response?.statusCode));
+    } catch (e) {
+      return Left(ApiException('Unexpected error: $e'));
+    }
+  }
+
+  Future<Either<ApiException, List<PostsOfUser>>> fetchPostsOfUser(String userId) async {
+    final uri = Uri.https(
+      ApiConstants.baseUrl,
+      '${ApiConstants.userEndPoint}/$userId${ApiConstants.postsEndPoint}',
+    );
+
+    try {
+      final response = await dio.getUri(uri,
+          options: Options(responseType: ResponseType.json));
+      if (response.statusCode == 200) {
+        final body = response.data;
+        if (body is List && body.isNotEmpty) {
+          final photoList = body.map((json) => PostsOfUser.fromJson(json)).toList();
+          return Right(photoList);
+        } else {
+          return Left(ApiException('No posts found for this user'));
+        }
+      }else {
+        return Left(ApiException.getApiStatus(response.statusCode ?? 0));
+      }
+    } on DioException catch (e) {
+      return Left(ApiException(e.message.toString(), e.response?.statusCode));
+    } catch (e) {
+      return Left(ApiException('Unexpected error: $e'));
+    }
+  }
+
+  Future<Either<ApiException, List<AlbumsOfUser>>> fetchAlbumsOfUser(String userId) async {
+    final uri = Uri.https(
+      ApiConstants.baseUrl,
+      '${ApiConstants.userEndPoint}/$userId${ApiConstants.albumEndPoint}',
+    );
+
+    try {
+      final response = await dio.getUri(uri,
+          options: Options(responseType: ResponseType.json));
+      if (response.statusCode == 200) {
+        final body = response.data;
+        if (body is List && body.isNotEmpty) {
+          final albumList = body.map((json) => AlbumsOfUser.fromJson(json)).toList();
+          return Right(albumList);
+        } else {
+          return Left(ApiException('No albums found for this user'));
+        }
+      }else {
+        return Left(ApiException.getApiStatus(response.statusCode ?? 0));
+      }
+    } on DioException catch (e) {
+      return Left(ApiException(e.message.toString(), e.response?.statusCode));
+    } catch (e) {
+      return Left(ApiException('Unexpected error: $e'));
+    }
+  }
+
 
 }
