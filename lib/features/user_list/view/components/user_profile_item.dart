@@ -9,6 +9,7 @@ class UserProfileItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.custom(
@@ -34,6 +35,7 @@ class UserProfileItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12.0),
               ),
               elevation: 2.0,
+              color: theme.tertiary,
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Center(
