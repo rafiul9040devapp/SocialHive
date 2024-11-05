@@ -1,14 +1,19 @@
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinity_list_comments/di/service_locator.dart';
+import 'package:infinity_list_comments/features/albums_of_user/view/albums_of_user_page.dart';
 import 'package:infinity_list_comments/features/comment/models/album.dart';
 import 'package:infinity_list_comments/features/comment_details/view/comment_details_page.dart';
 import 'package:infinity_list_comments/features/comments_of_post/view/comments_of_post_page.dart';
 import 'package:infinity_list_comments/features/connectivity/view/connection_page.dart';
+import 'package:infinity_list_comments/features/details_of_user_profile/view/details_of_user_profile_page.dart';
 import 'package:infinity_list_comments/features/home/view/home_page.dart';
+import 'package:infinity_list_comments/features/photos_of_user/view/photos_of_user_page.dart';
 import 'package:infinity_list_comments/features/post/models/post.dart';
 import 'package:infinity_list_comments/features/post_details/view/post_details_page.dart';
+import 'package:infinity_list_comments/features/post_of_user/view/post_of_user_page.dart';
 import 'package:infinity_list_comments/features/user/view/user_page.dart';
+import 'package:infinity_list_comments/features/user_list/model/user_profile.dart';
 
 enum Routes {
   home,
@@ -19,6 +24,10 @@ enum Routes {
   postDetails,
   commentsOfPost,
   userList,
+  detailsOfUserProfile,
+  postOfUser,
+  photosOfUser,
+  albumsOfUser,
 }
 
 extension RouteExtensions on Routes {
@@ -40,6 +49,14 @@ extension RouteExtensions on Routes {
         return argument != null ? '/comments_of_post/:argument' : '/comments_of_post';
       case Routes.userList:
         return '/user_list';
+      case Routes.detailsOfUserProfile:
+        return argument != null ? '/details_of_user_profile/:argument' : '/details_of_user_profile';
+      case Routes.postOfUser:
+        return argument != null ? '/posts_of_user/:argument' : '/posts_of_user';
+      case Routes.photosOfUser:
+        return argument != null ? '/photos_of_user/:argument' : '/photos_of_user';
+      case Routes.albumsOfUser:
+        return argument != null ? '/albums_of_user/:argument' : '/albums_of_user';
 
       // case AppRoute.login:
       //   return '/login';
@@ -47,6 +64,8 @@ extension RouteExtensions on Routes {
       //   return '/settings';
       // case AppRoute.profile:
       //   return id != null ? '/profile/$id' : '/profile';
+
+
 
     }
   }
@@ -65,6 +84,7 @@ class AppRoutes {
             builder: (context, state) => const ConnectionPage(),
           ),
           GoRoute(
+            name:Routes.comment.path(),
             path: Routes.comment.path(),
             builder: (context, state) => const HomePage(initialPage: 0),
           ),
@@ -83,6 +103,7 @@ class AppRoutes {
             },
           ),
           GoRoute(
+            name: Routes.post.path(),
             path: Routes.post.path(),
             builder: (context, state) => const HomePage(initialPage: 1),
           ),
@@ -102,10 +123,42 @@ class AppRoutes {
           ),
 
           GoRoute(
+            name: Routes.userList.path(),
             path: Routes.userList.path(),
             builder: (context, state) => const HomePage(initialPage: 2),
           ),
 
+          GoRoute(
+            path: Routes.detailsOfUserProfile.path(':argument'),
+            builder: (context, state) {
+              final profile = state.extra as UserProfile;
+              return DetailsOfUserProfilePage(userProfile: profile);
+            },
+          ),
+
+          GoRoute(
+            path: Routes.postOfUser.path(':argument'),
+            builder: (context, state) {
+              final profileId = state.extra as int;
+              return PostOfUserPage(profileId: profileId);
+            },
+          ),
+
+          GoRoute(
+            path: Routes.photosOfUser.path(':argument'),
+            builder: (context, state) {
+              final profileId = state.extra as int;
+              return PhotosOfUserPage(profileId: profileId);
+            },
+          ),
+
+          GoRoute(
+            path: Routes.albumsOfUser.path(':argument'),
+            builder: (context, state) {
+              final profileId = state.extra as int;
+              return AlbumsOfUserPage(profileId: profileId);
+            },
+          ),
         ],
       ),
     );

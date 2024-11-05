@@ -8,9 +8,11 @@ import 'package:infinity_list_comments/features/comment/bloc/comment_bloc.dart';
 import 'package:infinity_list_comments/features/comment_details/bloc/comment_details_bloc.dart';
 import 'package:infinity_list_comments/features/comments_of_post/bloc/comments_of_post_bloc.dart';
 import 'package:infinity_list_comments/features/connectivity/bloc/connectivity_bloc.dart';
+import 'package:infinity_list_comments/features/details_of_user_profile/bloc/tab_bloc.dart';
 import 'package:infinity_list_comments/features/home/bloc/navigation_bloc.dart';
 import 'package:infinity_list_comments/features/post/bloc/post_bloc.dart';
 import 'package:infinity_list_comments/features/post_details/bloc/post_details_bloc.dart';
+import 'package:infinity_list_comments/features/post_of_user/bloc/post_of_user_bloc.dart';
 import 'package:infinity_list_comments/features/user/bloc/user_bloc.dart';
 import 'package:infinity_list_comments/features/user_list/bloc/user_list_bloc.dart';
 import 'package:infinity_list_comments/repository/comment/comment_repository.dart';
@@ -73,9 +75,11 @@ class ServiceLocator {
     // User-related blocs
     getIt.registerFactory(() => UserBloc(repository: getIt<CommentRepository>()));
     getIt.registerFactory(() => UserListBloc(repository: getIt<UserRepository>()));
+    getIt.registerFactory(() => PostOfUserBloc(repository: getIt<UserRepository>()));
 
     // Connectivity and Navigation blocs
     getIt.registerFactory(() => ConnectivityBloc(connectivity: getIt()));
     getIt.registerFactory(() => NavigationBloc());
+    getIt.registerFactory(() => TabBloc());
   }
 }

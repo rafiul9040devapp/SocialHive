@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-class PhotosOfUserPage extends StatelessWidget {
+class AlbumsOfUserPage extends StatelessWidget {
   final int profileId;
-  const PhotosOfUserPage({super.key, required this.profileId});
+  const AlbumsOfUserPage({super.key, required this.profileId});
 
   @override
   Widget build(BuildContext context) {

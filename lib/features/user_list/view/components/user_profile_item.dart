@@ -42,7 +42,7 @@ class UserProfileItem extends StatelessWidget {
   Widget _buildUserProfile(ColorScheme theme, UserProfile profile) {
     return GestureDetector(
       onTap: (){
-        //router.push();
+        router.push(Routes.detailsOfUserProfile.path(profile.name ?? ''),extra: profile);
       },
       child: Card(
               shape: RoundedRectangleBorder(

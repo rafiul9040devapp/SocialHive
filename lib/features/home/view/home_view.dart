@@ -38,7 +38,7 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
     ).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Curves.easeInOut,
+        curve: Curves.linearToEaseOut,
       ),
     );
   }
@@ -54,8 +54,8 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
     context.read<NavigationBloc>().add(PageTapped(index));
     _pageController.animateToPage(
       index,
-      duration: const Duration(milliseconds: 500), // delay for the transition
-      curve: Curves.easeInOut, // smoother animation curve
+      duration: const Duration(seconds: 1), // delay for the transition
+      curve: Curves.linearToEaseOut, // smoother animation curve
     );
   }
 
@@ -64,7 +64,7 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
     return Scaffold(
       body: BlocBuilder<NavigationBloc, NavigationState>(
         builder: (context, state) {
-          _animationController.forward(from: 2);
+          _animationController.forward(from: 1);
           return SlideTransition(
             position: _slideAnimation,
             child: PageView(

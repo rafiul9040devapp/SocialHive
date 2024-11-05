@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class PhotosOfUserView extends StatelessWidget {
-  const PhotosOfUserView({super.key});
+class AlbumsOfUserView extends StatelessWidget {
+  const AlbumsOfUserView({super.key});
 
   @override
   Widget build(BuildContext context) {
