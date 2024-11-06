@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:infinity_list_comments/di/service_locator.dart';
+import 'package:infinity_list_comments/features/albums_of_user/model/albums_of_user.dart';
 import 'package:infinity_list_comments/features/albums_of_user/view/albums_of_user_page.dart';
 import 'package:infinity_list_comments/features/comment/models/album.dart';
 import 'package:infinity_list_comments/features/comment_details/view/comment_details_page.dart';
@@ -8,12 +9,17 @@ import 'package:infinity_list_comments/features/comments_of_post/view/comments_o
 import 'package:infinity_list_comments/features/connectivity/view/connection_page.dart';
 import 'package:infinity_list_comments/features/details_of_user_profile/view/details_of_user_profile_page.dart';
 import 'package:infinity_list_comments/features/home/view/home_page.dart';
+import 'package:infinity_list_comments/features/photos_in_the_album/view/photos_in_the_album_page.dart';
 import 'package:infinity_list_comments/features/photos_of_user/view/photos_of_user_page.dart';
 import 'package:infinity_list_comments/features/post/models/post.dart';
 import 'package:infinity_list_comments/features/post_details/view/post_details_page.dart';
 import 'package:infinity_list_comments/features/post_of_user/view/post_of_user_page.dart';
 import 'package:infinity_list_comments/features/user/view/user_page.dart';
 import 'package:infinity_list_comments/features/user_list/model/user_profile.dart';
+
+
+GoRouter get router => GetIt.instance<GoRouter>();
+
 
 enum Routes {
   home,
@@ -28,6 +34,7 @@ enum Routes {
   postOfUser,
   photosOfUser,
   albumsOfUser,
+  photosInTheAlbum,
 }
 
 extension RouteExtensions on Routes {
@@ -57,21 +64,13 @@ extension RouteExtensions on Routes {
         return argument != null ? '/photos_of_user/:argument' : '/photos_of_user';
       case Routes.albumsOfUser:
         return argument != null ? '/albums_of_user/:argument' : '/albums_of_user';
-
-      // case AppRoute.login:
-      //   return '/login';
-      // case AppRoute.settings:
-      //   return '/settings';
-      // case AppRoute.profile:
-      //   return id != null ? '/profile/$id' : '/profile';
-
-
+      case Routes.photosInTheAlbum:
+        return argument != null ? '/photos_in_the_album/:argument' : '/photos_in_the_album';
 
     }
   }
 }
 
-GoRouter get router => GetIt.instance<GoRouter>();
 
 class AppRoutes {
   static void setupRouter() {
@@ -159,6 +158,16 @@ class AppRoutes {
               return AlbumsOfUserPage(profileId: profileId);
             },
           ),
+
+          GoRoute(
+            path: Routes.photosInTheAlbum.path(':argument'),
+            builder: (context, state) {
+              final album = state.extra as AlbumsOfUser;
+              return PhotosInTheAlbumPage(albumsOfUser: album);
+            },
+          ),
+
+
         ],
       ),
     );

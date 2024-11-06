@@ -11,6 +11,7 @@ import 'package:infinity_list_comments/features/comments_of_post/bloc/comments_o
 import 'package:infinity_list_comments/features/connectivity/bloc/connectivity_bloc.dart';
 import 'package:infinity_list_comments/features/details_of_user_profile/bloc/tab_bloc.dart';
 import 'package:infinity_list_comments/features/home/bloc/navigation_bloc.dart';
+import 'package:infinity_list_comments/features/photos_in_the_album/bloc/photos_in_the_album_bloc.dart';
 import 'package:infinity_list_comments/features/photos_of_user/bloc/photos_of_user_bloc.dart';
 import 'package:infinity_list_comments/features/post/bloc/post_bloc.dart';
 import 'package:infinity_list_comments/features/post_details/bloc/post_details_bloc.dart';
@@ -80,6 +81,7 @@ class ServiceLocator {
     getIt.registerFactory(() => PostOfUserBloc(repository: getIt<UserRepository>()));
     getIt.registerFactory(() => AlbumsOfUserBloc(repository: getIt<UserRepository>()));
     getIt.registerFactory(() => PhotosOfUserBloc(repository: getIt<UserRepository>()));
+    getIt.registerFactory(() => PhotosInTheAlbumBloc(repository: getIt<UserRepository>()));
 
     // Connectivity and Navigation blocs
     getIt.registerFactory(() => ConnectivityBloc(connectivity: getIt()));

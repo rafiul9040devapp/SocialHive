@@ -10,11 +10,11 @@ class PostOfUserItem extends StatelessWidget {
     final theme = Theme.of(context).colorScheme;
     return Center(
       child: ListWheelScrollView(
-        itemExtent: 250, // Height of each item in the wheel
+        itemExtent: 300, // Height of each item in the wheel
         diameterRatio: 1.5, // Curve intensity
-        perspective: 0.004, // 3D perspective effect
+        perspective: 0.002, // 3D perspective effect
         physics: const FixedExtentScrollPhysics(),
-        offAxisFraction: -1.5,
+        offAxisFraction: 1.5,
         children: List.generate(posts.length, (index) {
           final post = posts[index];
           return Card(
