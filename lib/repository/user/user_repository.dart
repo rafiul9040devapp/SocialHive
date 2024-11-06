@@ -12,4 +12,5 @@ abstract class UserRepository {
   Future<Either<ApiException, List<PhotosOfUser>>> fetchPhotosOfUser(String userId,[int startIndex = 0]);
   Future<Either<ApiException, List<PostsOfUser>>> fetchPostsOfUser(String userId);
   Future<Either<ApiException, List<AlbumsOfUser>>> fetchAlbumsOfUser(String userId);
+  Future<Either<ApiException, List<PhotosOfUser>>> fetchPhotosFromAlbumOfUser(String albumId,[int startIndex = 0]);
 }

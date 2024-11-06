@@ -34,4 +34,9 @@ class UserRepositoryImpl extends UserRepository{
     return _apiClientDio.fetchPostsOfUser(userId);
   }
 
+  @override
+  Future<Either<ApiException, List<PhotosOfUser>>> fetchPhotosFromAlbumOfUser(String albumId, [int startIndex = 0]) {
+    return _apiClientDio.fetchPhotosFromAlbumOfUser(albumId);
+  }
+
 }

@@ -178,7 +178,7 @@ class ApiClientDio {
       '${ApiConstants.userEndPoint}/$userId${ApiConstants.photoEndPoint}',
       <String, String>{
         '_start': '$startIndex',
-        '_limit': '${ApiConstants.limit}',
+        '_limit': '50',
       },
     );
 
@@ -246,6 +246,37 @@ class ApiClientDio {
           return Right(albumList);
         } else {
           return Left(ApiException('No albums found for this user'));
+        }
+      }else {
+        return Left(ApiException.getApiStatus(response.statusCode ?? 0));
+      }
+    } on DioException catch (e) {
+      return Left(ApiException(e.message.toString(), e.response?.statusCode));
+    } catch (e) {
+      return Left(ApiException('Unexpected error: $e'));
+    }
+  }
+
+  Future<Either<ApiException, List<PhotosOfUser>>> fetchPhotosFromAlbumOfUser(String albumId,[int startIndex = 0]) async {
+    final uri = Uri.https(
+      ApiConstants.baseUrl,
+      '${ApiConstants.userEndPoint}/$albumId${ApiConstants.photoEndPoint}',
+      <String, String>{
+        '_start': '$startIndex',
+        '_limit': '50',
+      },
+    );
+
+    try {
+      final response = await dio.getUri(uri,
+          options: Options(responseType: ResponseType.json));
+      if (response.statusCode == 200) {
+        final body = response.data;
+        if (body is List && body.isNotEmpty) {
+          final photoList = body.map((json) => PhotosOfUser.fromJson(json)).toList();
+          return Right(photoList);
+        } else {
+          return const Right([]);
         }
       }else {
         return Left(ApiException.getApiStatus(response.statusCode ?? 0));
