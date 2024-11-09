@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinity_list_comments/features/albums_of_user/view/albums_of_user_page.dart';
 import 'package:infinity_list_comments/features/photos_of_user/view/photos_of_user_page.dart';
 import 'package:infinity_list_comments/features/post_of_user/view/post_of_user_page.dart';
-
+import 'package:infinity_list_comments/theme/app_colors.dart';
 
 import '../bloc/tab_bloc.dart';
 
@@ -48,17 +48,40 @@ class _DetailsOfUserProfileViewState extends State<DetailsOfUserProfileView>
           _tabController.animateTo(state.tabIndex);
         }
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0,horizontal: 8.0),
+          padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
           child: Column(
             children: [
               //going to work on the design
-              TabBar(
-                controller: _tabController,
-                tabs: const [
-                  Tab(text: 'Post'),
-                  Tab(text: 'Album'),
-                  Tab(text: 'Photo'),
-                ],
+              ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: TabBar(
+                      controller: _tabController,
+                      indicator: BoxDecoration(
+                        color: AppColors.blackPearl.withOpacity(0.5), // Custom color for the active tab
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      dividerColor: Colors.transparent,
+                      indicatorSize: TabBarIndicatorSize.tab,
+                      labelColor: Colors.white, // Color for active tab text
+                      unselectedLabelColor: Colors.black, // Color for inactive tab text
+                      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.normal),
+                      tabs: const [
+                        Tab(text: 'Post'),
+                        Tab(text: 'Album'),
+                        Tab(text: 'Photo'),
+                      ],
+                    ),
+                  ),
+                ),
               ),
 
               const SizedBox(height: 8),

@@ -44,39 +44,41 @@ class _PhotosInTheAlbumViewState extends State<PhotosInTheAlbumView> {
   }
 
   Widget _buildSuccessContent(PhotosInTheAlbumState state) {
-    return CarouselSlider.builder(
-      carouselController: _carouselController,
-      itemCount: state.hasReachedMax ? state.photos.length : state.photos.length + 1,
-      itemBuilder: (context, index, realIndex) {
-        if (index >= state.photos.length) {
-          return const LoadingStateDisplay();
-        }
-        return PhotosInTheAlbumItem(photosOfUser: state.photos[index]);
-      },
-      options: CarouselOptions(
-        height: themeService.screenHeight * .65,
-        aspectRatio: 16/9,
-        viewportFraction: 0.8,
-        initialPage: 0,
-        enableInfiniteScroll: true,
-        reverse: false,
-        autoPlay: true,
-        autoPlayInterval: const Duration(seconds: 3),
-        autoPlayAnimationDuration: const Duration(milliseconds: 800),
-        autoPlayCurve: Curves.fastOutSlowIn,
-        enlargeCenterPage: true,
-        enlargeFactor: 0.2,
-        scrollDirection: Axis.horizontal,
-        onPageChanged: (index, reason) {
-          setState(() {
-            _currentIndex = index;
-          });
-          if (_currentIndex >= state.photos.length - 1 && !state.hasReachedMax) {
-            context.read<PhotosInTheAlbumBloc>().add(
-              FetchPhotosFromAlbumEvent(albumId: widget.albumsOfUser.id ?? 0),
-            );
+    return Center(
+      child: CarouselSlider.builder(
+        carouselController: _carouselController,
+        itemCount: state.hasReachedMax ? state.photos.length : state.photos.length + 1,
+        itemBuilder: (context, index, realIndex) {
+          if (index >= state.photos.length) {
+            return const LoadingStateDisplay();
           }
+          return PhotosInTheAlbumItem(photosOfUser: state.photos[index]);
         },
+        options: CarouselOptions(
+          height: themeService.screenHeight * .65,
+          aspectRatio: 16/9,
+          viewportFraction: 0.8,
+          initialPage: 0,
+          enableInfiniteScroll: true,
+          reverse: false,
+          autoPlay: true,
+          autoPlayInterval: const Duration(seconds: 3),
+          autoPlayAnimationDuration: const Duration(milliseconds: 800),
+          autoPlayCurve: Curves.fastOutSlowIn,
+          enlargeCenterPage: true,
+          enlargeFactor: 0.2,
+          scrollDirection: Axis.horizontal,
+          onPageChanged: (index, reason) {
+            setState(() {
+              _currentIndex = index;
+            });
+            if (_currentIndex >= state.photos.length - 1 && !state.hasReachedMax) {
+              context.read<PhotosInTheAlbumBloc>().add(
+                FetchPhotosFromAlbumEvent(albumId: widget.albumsOfUser.id ?? 0),
+              );
+            }
+          },
+        ),
       ),
     );
   }
