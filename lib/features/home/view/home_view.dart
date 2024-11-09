@@ -29,7 +29,7 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
     // Initialize AnimationController
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 500),
     );
 
     _slideAnimation = Tween<Offset>(
@@ -38,7 +38,7 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
     ).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Curves.linearToEaseOut,
+        curve: Curves.easeIn,
       ),
     );
   }
@@ -54,8 +54,8 @@ class HomeViewState extends State<HomeView> with SingleTickerProviderStateMixin 
     context.read<NavigationBloc>().add(PageTapped(index));
     _pageController.animateToPage(
       index,
-      duration: const Duration(seconds: 1), // delay for the transition
-      curve: Curves.linearToEaseOut, // smoother animation curve
+      duration: const Duration(microseconds: 500), // delay for the transition
+      curve: Curves.easeIn, // smoother animation curve
     );
   }
 

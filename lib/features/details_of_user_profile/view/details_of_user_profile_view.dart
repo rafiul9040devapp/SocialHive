@@ -84,7 +84,7 @@ class _DetailsOfUserProfileViewState extends State<DetailsOfUserProfileView>
                 ),
               ),
 
-              const SizedBox(height: 8),
+              const SizedBox(height: 16),
 
               Expanded(
                 child: TabBarView(
